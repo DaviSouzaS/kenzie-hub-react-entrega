@@ -25,7 +25,6 @@ export  function Dashboard ({setUser}) {
             } catch (error) {
             }
         }
-    
         getUserInfos()
     }, [])
 
