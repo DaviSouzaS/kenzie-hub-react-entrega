@@ -18,6 +18,10 @@ export const Displays = createGlobalStyle`
     align-items: center;
 }
 
+.justfy-content-between {
+    justify-content: space-between;
+}
+
 @media(max-width: 900px) {
     .login-mobile {
         width: 90%;
@@ -32,6 +36,10 @@ export const Displays = createGlobalStyle`
     .login-bg-mobile {
         
         height: auto;
+    }
+
+    .register-container-mobile {
+        width: 90%;
     }
 }
 `

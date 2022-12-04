@@ -2,11 +2,11 @@ import { createGlobalStyle } from "styled-components";
 
 export const StyledButtons = createGlobalStyle`
 
-    .form-login {
+    .form-box {
         width: 90%;
     }
 
-    .form-login > button{
+    .form-box > button{
         cursor: pointer;
         width: 100%;
         height: 48px;
@@ -19,7 +19,7 @@ export const StyledButtons = createGlobalStyle`
         font-size: var(--font-size-2);
     }
 
-    .form-login > button:hover {
+    .form-box > button:hover {
         transition-duration: 0.3s;
         background-color: var(--color-primary-focus);
     }
@@ -60,5 +60,21 @@ export const StyledButtons = createGlobalStyle`
         cursor: pointer;
         width: 14px;
         height: 22px;
+    }
+
+    .back-to-login {
+        width: 67px;
+        height: 40px;
+        border-radius: var(--radius-1);
+        background-color: var(--grey-3);
+        font-weight: var(--font-weight-2);
+        font-size: var(--font-size-4);
+        color: var(--grey-0);
+        text-decoration: none;
+    }
+
+    .back-to-login:hover {
+        transition-duration: 0.3s;
+        background-color: var(--grey-2);
     }
 `

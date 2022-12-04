@@ -2,6 +2,8 @@ import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { useState } from "react"
+import { StyledInputBox } from "../Input/style"
+import { StyledSelect, StyledSelectBox } from "./style"
 import eyeIcon from "../../assets/eye-icon.svg"
 import { request } from "../../services/api"
 import { Input } from "../Input"
@@ -49,7 +51,7 @@ export function RegisterForm () {
         .min(3, "O campo precisa ter mais que 2 caracteres")
         .max(200, "O campo pode ter até 200 caracteres"),
 
-        course_module: yup.string().required("É necessário escolher um módulo")
+        course_module: yup.string().required()
     })
 
     const { register, handleSubmit, formState: { errors }, } = useForm({ resolver: yupResolver(validate) })
@@ -59,28 +61,41 @@ export function RegisterForm () {
     }
 
     return (
-        <form onSubmit={handleSubmit(registerUser)} noValidate>
+        <form className="form-box" onSubmit={handleSubmit(registerUser)} noValidate>
 
+            <StyledInputBox>
             <Input label={"Nome"} type="text" id="name" placeholder="Digite aqui seu nome" register = {register("name")}/>
-            {errors.name?.message && <p>{errors.name.message}</p>}
+            {errors.name?.message && <p className ="input-waring">{errors.name.message}</p>}
+            </StyledInputBox>
 
+            <StyledInputBox>
             <Input label={"Email"} type="email" id="mail" placeholder="Digite aqui seu email" register = {register("email")}/>
-            {errors.email?.message && <p>{errors.email.message}</p>}
+            {errors.email?.message && <p className ="input-waring">{errors.email.message}</p>}
+            </StyledInputBox>
 
-            <Input label={"Senha"} type={showPassword ? "text" : "password"} id="pass" placeholder="Digite aqui sua senha" register = {register("password")} btnShowPass = {<button type="button" onClick={showPass}> <img src={eyeIcon} alt="eye-icon" /></button>}/>
-            {errors.password?.message && <p>{errors.password.message}</p>}
+            <StyledInputBox>
+            <Input label={"Senha"} type={showPassword ? "text" : "password"} id="pass" placeholder="Digite aqui sua senha" register = {register("password")} btnShowPass = {<button className="show-pass-button" type="button" onClick={showPass}> <img src={eyeIcon} alt="eye-icon" /></button>}/>
+            {errors.password?.message && <p className ="input-waring">{errors.password.message}</p>}
+            </StyledInputBox>
 
+            <StyledInputBox>
             <Input label={"Confirmar Senha"} type={showPassword ? "text" : "password"} id="confirm" placeholder="Digite novamente sua senha" register = {register("confirm")}/>
-            {errors.confirm?.message && <p>{errors.confirm.message}</p>}
+            {errors.confirm?.message && <p className ="input-waring">{errors.confirm.message}</p>}
+            </StyledInputBox>
 
+            <StyledInputBox>
             <Input label={"Bio"} type="text" id="bio" placeholder="Fale sobre você" register = {register("bio")}/>
-            {errors.bio?.message && <p>{errors.bio.message}</p>}
+            {errors.bio?.message && <p className ="input-waring">{errors.bio.message}</p>}
+            </StyledInputBox>
 
-            <Input label={"Contato"} type="text" id="contact" placeholder="Opção de contato" register = {register("contact")}/>
-            {errors.contact?.message && <p>{errors.contact.message}</p>}
-           
-            <label htmlFor="module">Selecionar módulo</label>
-            <div>
+            <StyledInputBox>
+            <Input label={"Contato"} type="text" id="contact" placeholder="Opção de contato" register = {register("contact")}/> 
+            {errors.contact?.message && <p className ="input-waring">{errors.contact.message}</p>}
+            </StyledInputBox>
+
+            <StyledSelectBox>
+            <label className="label-select" htmlFor="module">Selecionar módulo</label>
+            <StyledSelect className="display-flex justify-content-center">
                 <select id="module" {...register("course_module")}>
                     <option value="Módulo 1">Módulo 1</option>
                     <option value="Módulo 2">Módulo 2</option>
@@ -89,9 +104,8 @@ export function RegisterForm () {
                     <option value="Módulo 5">Módulo 5</option>
                     <option value="Módulo 6">Módulo 6</option>
                 </select>
-            </div>
-            {errors.course_module?.message && <p>{errors.course_module.message}</p>}
-
+            </StyledSelect>
+            </StyledSelectBox>
             <Button type = {"submit"} name = {"Cadastrar"}/>
         </form>
     )

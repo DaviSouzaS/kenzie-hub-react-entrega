@@ -5,7 +5,7 @@ import { request } from "../../services/api"
 import { useState } from "react"
 import { Input } from "../Input"
 import { Button } from "../Button"
-import { StyledInputBox } from "./style"
+import { StyledInputBox } from "../Input/style"
 import eyeIcon from "../../assets/eye-icon.svg"
 import spinner from "../../assets/spinner.svg"
 import * as yup from "yup"
@@ -46,7 +46,7 @@ export function LoginForm ({setUser}) {
     }
 
     return (
-        <form className="form-login" onSubmit={handleSubmit(login)}>
+        <form className="form-box form-login" onSubmit={handleSubmit(login)}>
         
             <StyledInputBox>
                 <Input label={"Email"} type="email" id="email" placeholder="Digite aqui seu email" register = {register("email")}/> 
