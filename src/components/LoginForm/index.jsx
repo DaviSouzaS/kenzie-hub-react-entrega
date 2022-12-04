@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { request } from "../../services/api"
 import { useState } from "react"
+import eyeIcon from "../../assets/eye-icon.svg"
+import spinner from "../../assets/spinner.svg"
 import * as yup from "yup"
 
 
@@ -10,6 +12,7 @@ export function LoginForm () {
 
     const [user, setUser] = useState([])
     const [loading, setLoading] = useState(false)
+    const [showPassword, setShowPassword] = useState(false)
 
     const navigate = useNavigate()
 
@@ -37,18 +40,26 @@ export function LoginForm () {
 
     const { register, handleSubmit, formState: { errors }, } = useForm({ resolver: yupResolver(validate) })
 
+    function showPass() {
+        setShowPassword(!showPassword)
+    }
+
     return (
         <form onSubmit={handleSubmit(login)}>
             <label htmlFor="email">Email</label>
-            <input type="email" id="email" placeholder="Digite aqui seu email" {...register("email")}/>
+            <div>
+                <input type="email" id="email" placeholder="Digite aqui seu email" {...register("email")}/>
+            </div>
             {errors.email?.message && <p>{errors.email.message}</p>}
 
             <label htmlFor="password">Senha</label>
-            <input type="password" id="password" placeholder="Digite aqui sua senha" {...register("password")}/>
+            <div>
+                <input type={showPassword ? "text" : "password"} id="password" placeholder="Digite aqui sua senha" {...register("password")}/>
+                <button type="button" onClick={showPass}> <img src={eyeIcon} alt="eye-icon" /> </button>
+            </div>
             {errors.password?.message && <p>{errors.password.message}</p>}
 
-            {/* NO LUGAR DO "CARREGANDO..." COLOQUE UM SPINNER DE CARREGAMENTO */}
-            <button type="submit">{loading ? <>Carregando...</> : <>Entrar</>}</button>
+            <button type="submit">{loading ? <><img src={spinner} alt="loading-icon" /></> : <>Entrar</>}</button>
             
         </form>
     )
