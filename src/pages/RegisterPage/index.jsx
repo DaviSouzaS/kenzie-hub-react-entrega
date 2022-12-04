@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import { RegisterForm } from "../../components/RegisterForm"
+import { Button } from "../../components/Button"
 import logo from "../../assets/logo.svg"
 
 export function RegisterPage () {
@@ -15,7 +16,7 @@ export function RegisterPage () {
             <div>
                 <div>
                     <img src={logo} alt="kenzie-hub-logo"/>
-                    <button type="click" onClick={redirectToLogin}>Voltar</button>
+                    <Button type = {"click"} name = {"Voltar"} redirect = {redirectToLogin}/>
                 </div>
                 <div>
                     <h1>Crie sua conta</h1>

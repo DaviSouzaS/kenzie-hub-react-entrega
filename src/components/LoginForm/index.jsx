@@ -4,6 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import { request } from "../../services/api"
 import { useState } from "react"
 import { Input } from "../Input"
+import { Button } from "../Button"
 import eyeIcon from "../../assets/eye-icon.svg"
 import spinner from "../../assets/spinner.svg"
 import * as yup from "yup"
@@ -54,7 +55,7 @@ export function LoginForm ({setUser}) {
             </Input>  
             {errors.password?.message && <p>{errors.password.message}</p>}
 
-            <button type="submit">{loading ? <><img src={spinner} alt="loading-icon" /></> : <>Entrar</>}</button>
+            <Button type={"submit"} name = {loading ? <><img src={spinner} alt="loading-icon" /></> : <>Entrar</>}/>
             
         </form>
     )
