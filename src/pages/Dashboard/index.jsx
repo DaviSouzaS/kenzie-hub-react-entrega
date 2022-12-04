@@ -1,26 +1,35 @@
+import { useEffect, useState } from "react"
 import { request } from "../../services/api"
 
-export function Dashboard () {
+export  function Dashboard () {
 
-    async function getUserInfos () {
-        const token = localStorage.getItem("@TOKEN")
+    const [userInfos, setUserInfos] = useState([])
 
-        const config = {
-           headers: { Authorization : `Bearer ${token}`}
+    useEffect(() => {
+        async function getUserInfos () {
+            const token = localStorage.getItem("@TOKEN")
+    
+            const config = {
+               headers: { Authorization : `Bearer ${token}`}
+            }
+    
+            try {
+                const response = await request.get("/profile", config)
+                setUserInfos(response.data)
+            } catch (error) {
+                console.log(error)
+            }
+    
         }
-
-        try {
-            const response = await request.get("/profile", config)
-            console.log(response)
-        } catch (error) {
-            console.log(error)
-        }
-
-    }
-
-    getUserInfos()
-
+    
+        getUserInfos()
+    }, [])
+    
     return (
-        <h1>Dashboard</h1>
+        
+        <div>
+          <p>Olá, {userInfos.name}</p>
+          <p>{userInfos.course_module}</p>
+        </div>
     )
 }
