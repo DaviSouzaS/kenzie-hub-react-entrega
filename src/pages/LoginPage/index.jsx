@@ -1,8 +1,27 @@
 import { LoginForm } from "../../components/LoginForm"
+import { useNavigate } from "react-router-dom"
+import logo from "../../assets/logo.svg"
 
 export function LoginPage () {
 
+    const navigate = useNavigate()
+
+    function redirectToRegister () {
+        navigate("/registerPage")
+    }
+
     return (
-        <LoginForm/>
+        <div>
+            <div>
+                <img src={logo} alt="kenzie-hub-logo" />
+                <div>
+                    <h1>Login</h1>
+                    <LoginForm/>
+                    <p>Ainda não possui uma conta?</p>
+                    <button type="button" onClick={redirectToRegister}>Cadastre-se</button>
+                </div>
+            </div>
+        </div>
+        
     )
 }
