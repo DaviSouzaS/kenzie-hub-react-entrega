@@ -51,38 +51,52 @@ export function RegisterForm () {
     return (
         <form onSubmit={handleSubmit(registerUser)} noValidate>
             <label htmlFor="name">Nome</label>
-            <input type="text" id="name" placeholder="Digite aqui seu nome" {...register("name")}/>
+            <div>
+                <input type="text" id="name" placeholder="Digite aqui seu nome" {...register("name")}/>
+            </div>
             {errors.name?.message && <p>{errors.name.message}</p>}
 
             <label htmlFor="mail">Email</label>
-            <input type="email" id="mail" placeholder="Digite aqui seu email" {...register("email")}/>
+            <div>
+                <input type="email" id="mail" placeholder="Digite aqui seu email" {...register("email")}/>
+            </div>
             {errors.email?.message && <p>{errors.email.message}</p>}
 
             <label htmlFor="pass">Senha</label>
-            <input type="password" id="pass" placeholder="Digite aqui sua senha" {...register("password")}/>
+            <div>
+                <input type="password" id="pass" placeholder="Digite aqui sua senha" {...register("password")}/>
+            </div>
             {errors.password?.message && <p>{errors.password.message}</p>}
 
             <label htmlFor="confirm">Confirmar Senha</label>
-            <input type="password" id="confirm" placeholder="Digite novamente sua senha" {...register("confirm")}/>
+            <div>
+                <input type="password" id="confirm" placeholder="Digite novamente sua senha" {...register("confirm")}/>
+            </div>
             {errors.confirm?.message && <p>{errors.confirm.message}</p>}
 
             <label htmlFor="bio">Bio</label>
-            <input type="text" id="bio" placeholder="Fale sobre você" {...register("bio")}/>
+            <div>
+                <input type="text" id="bio" placeholder="Fale sobre você" {...register("bio")}/>
+            </div>
             {errors.bio?.message && <p>{errors.bio.message}</p>}
 
             <label htmlFor="contact">Contato</label>
-            <input type="text" id="contact" placeholder="Opção de contato" {...register("contact")}/>
+            <div>
+                <input type="text" id="contact" placeholder="Opção de contato" {...register("contact")}/>
+            </div>
             {errors.contact?.message && <p>{errors.contact.message}</p>}
 
             <label htmlFor="module">Selecionar módulo</label>
-            <select id="module" {...register("course_module")}>
-                <option value="Modulo-1">Módulo 1</option>
-                <option value="Modulo-2">Módulo 2</option>
-                <option value="Modulo-3">Módulo 3</option>
-                <option value="Modulo-4">Módulo 4</option>
-                <option value="Modulo-5">Módulo 5</option>
-                <option value="Modulo-6">Módulo 6</option>
-            </select>
+            <div>
+                <select id="module" {...register("course_module")}>
+                    <option value="Modulo-1">Módulo 1</option>
+                    <option value="Modulo-2">Módulo 2</option>
+                    <option value="Modulo-3">Módulo 3</option>
+                    <option value="Modulo-4">Módulo 4</option>
+                    <option value="Modulo-5">Módulo 5</option>
+                    <option value="Modulo-6">Módulo 6</option>
+                </select>
+            </div>
             {errors.course_module?.message && <p>{errors.course_module.message}</p>}
 
             <button type="submit">Cadastrar</button>
