@@ -1,5 +1,6 @@
 import { LoginForm } from "../../components/LoginForm"
 import { useNavigate } from "react-router-dom"
+import { Button } from "../../components/Button"
 import logo from "../../assets/logo.svg"
 
 export function LoginPage ({setUser}) {
@@ -18,7 +19,7 @@ export function LoginPage ({setUser}) {
                     <h1>Login</h1>
                     <LoginForm setUser = {setUser}/>
                     <p>Ainda não possui uma conta?</p>
-                    <button type="button" onClick={redirectToRegister}>Cadastre-se</button>
+                    <Button type={"button"} name = {"Cadastre-se"} redirect = {redirectToRegister}/>
                 </div>
             </div>
         </div>

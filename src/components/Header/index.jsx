@@ -1,4 +1,5 @@
 import logo from "../../assets/logo.svg"
+import { Button } from "../Button"
 import { useNavigate } from "react-router-dom"
 
 export function Header ({setUser}) {
@@ -15,7 +16,7 @@ export function Header ({setUser}) {
         <header>
             <div>
                 <img src={logo} alt="kenzie-hub-logo" />
-                <button type="button" onClick={logout}>Sair</button>
+                <Button type = {"button"} name = {"Sair"} redirect = {logout}/>
             </div>
         </header>
     )

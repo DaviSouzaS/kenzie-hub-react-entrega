@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { request } from "../../services/api"
 import { Input } from "../Input"
+import { Button } from "../Button"
 import * as yup from "yup"
 
 export function RegisterForm () {
@@ -83,7 +84,7 @@ export function RegisterForm () {
             </div>
             {errors.course_module?.message && <p>{errors.course_module.message}</p>}
 
-            <button type="submit">Cadastrar</button>
+            <Button type = {"submit"} name = {"Cadastrar"}/>
         </form>
     )
 }
