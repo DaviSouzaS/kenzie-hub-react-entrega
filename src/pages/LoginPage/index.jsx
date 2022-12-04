@@ -2,7 +2,7 @@ import { LoginForm } from "../../components/LoginForm"
 import { useNavigate } from "react-router-dom"
 import logo from "../../assets/logo.svg"
 
-export function LoginPage () {
+export function LoginPage ({setUser}) {
 
     const navigate = useNavigate()
 
@@ -16,7 +16,7 @@ export function LoginPage () {
                 <img src={logo} alt="kenzie-hub-logo" />
                 <div>
                     <h1>Login</h1>
-                    <LoginForm/>
+                    <LoginForm setUser = {setUser}/>
                     <p>Ainda não possui uma conta?</p>
                     <button type="button" onClick={redirectToRegister}>Cadastre-se</button>
                 </div>
