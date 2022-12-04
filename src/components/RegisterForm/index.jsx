@@ -1,11 +1,20 @@
 import { useForm } from "react-hook-form"
+import { useNavigate } from "react-router-dom"
 import { yupResolver } from "@hookform/resolvers/yup"
+import { request } from "../../services/api"
 import * as yup from "yup"
 
 export function RegisterForm () {
 
-    function submit (data) {
-        console.log(data)
+    const navigate = useNavigate()
+
+    async function registerUser (data) {
+        try {
+            const response = await request.post("/users", data)
+            navigate("/")
+        } catch (error) { 
+            //RETORNAR MENSAGEM DE ERRO  
+        }
     }
 
     const validate = yup.object().shape({
@@ -40,7 +49,7 @@ export function RegisterForm () {
     const { register, handleSubmit, formState: { errors }, } = useForm({ resolver: yupResolver(validate) })
 
     return (
-        <form onSubmit={handleSubmit(submit)} noValidate>
+        <form onSubmit={handleSubmit(registerUser)} noValidate>
             <label htmlFor="name">Nome</label>
             <input type="text" id="name" placeholder="Digite aqui seu nome" {...register("name")}/>
             {errors.name?.message && <p>{errors.name.message}</p>}
@@ -67,12 +76,12 @@ export function RegisterForm () {
 
             <label htmlFor="module">Selecionar módulo</label>
             <select id="module" {...register("course_module")}>
-                <option value="modulo1">Módulo 1</option>
-                <option value="modulo2">Módulo 2</option>
-                <option value="modulo3">Módulo 3</option>
-                <option value="modulo4">Módulo 4</option>
-                <option value="modulo5">Módulo 5</option>
-                <option value="modulo6">Módulo 6</option>
+                <option value="Modulo-1">Módulo 1</option>
+                <option value="Modulo-2">Módulo 2</option>
+                <option value="Modulo-3">Módulo 3</option>
+                <option value="Modulo-4">Módulo 4</option>
+                <option value="Modulo-5">Módulo 5</option>
+                <option value="Modulo-6">Módulo 6</option>
             </select>
             {errors.course_module?.message && <p>{errors.course_module.message}</p>}
 
