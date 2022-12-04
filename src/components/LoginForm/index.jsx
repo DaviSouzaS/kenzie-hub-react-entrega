@@ -3,10 +3,10 @@ import { useNavigate } from "react-router-dom"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { request } from "../../services/api"
 import { useState } from "react"
+import { Input } from "../Input"
 import eyeIcon from "../../assets/eye-icon.svg"
 import spinner from "../../assets/spinner.svg"
 import * as yup from "yup"
-
 
 export function LoginForm ({setUser}) {
 
@@ -45,17 +45,13 @@ export function LoginForm ({setUser}) {
 
     return (
         <form onSubmit={handleSubmit(login)}>
-            <label htmlFor="email">Email</label>
-            <div>
-                <input type="email" id="email" placeholder="Digite aqui seu email" {...register("email")}/>
-            </div>
+        
+            <Input label={"Email"} type="email" id="email" placeholder="Digite aqui seu email" register = {register("email")}/>
             {errors.email?.message && <p>{errors.email.message}</p>}
 
-            <label htmlFor="password">Senha</label>
-            <div>
-                <input type={showPassword ? "text" : "password"} id="password" placeholder="Digite aqui sua senha" {...register("password")}/>
+            <Input label={"Senha"} type={showPassword ? "text" : "password"} id="password" placeholder="Digite aqui sua senha" register = {register("password")}>
                 <button type="button" onClick={showPass}> <img src={eyeIcon} alt="eye-icon" /> </button>
-            </div>
+            </Input>  
             {errors.password?.message && <p>{errors.password.message}</p>}
 
             <button type="submit">{loading ? <><img src={spinner} alt="loading-icon" /></> : <>Entrar</>}</button>
