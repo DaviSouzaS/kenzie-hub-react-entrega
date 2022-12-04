@@ -8,9 +8,8 @@ import spinner from "../../assets/spinner.svg"
 import * as yup from "yup"
 
 
-export function LoginForm () {
+export function LoginForm ({setUser}) {
 
-    const [user, setUser] = useState([])
     const [loading, setLoading] = useState(false)
     const [showPassword, setShowPassword] = useState(false)
 
