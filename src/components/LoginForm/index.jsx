@@ -50,9 +50,7 @@ export function LoginForm ({setUser}) {
             <Input label={"Email"} type="email" id="email" placeholder="Digite aqui seu email" register = {register("email")}/>
             {errors.email?.message && <p>{errors.email.message}</p>}
 
-            <Input label={"Senha"} type={showPassword ? "text" : "password"} id="password" placeholder="Digite aqui sua senha" register = {register("password")}>
-                <button type="button" onClick={showPass}> <img src={eyeIcon} alt="eye-icon" /> </button>
-            </Input>  
+            <Input label={"Senha"} type={showPassword ? "text" : "password"} id="password" placeholder="Digite aqui sua senha" register = {register("password")} btnShowPass = {<button type="button" onClick={showPass}> <img src={eyeIcon} alt="eye-icon" /></button>}/>
             {errors.password?.message && <p>{errors.password.message}</p>}
 
             <Button type={"submit"} name = {loading ? <><img src={spinner} alt="loading-icon" /></> : <>Entrar</>}/>

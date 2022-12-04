@@ -1,6 +1,8 @@
 import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
 import { yupResolver } from "@hookform/resolvers/yup"
+import { useState } from "react"
+import eyeIcon from "../../assets/eye-icon.svg"
 import { request } from "../../services/api"
 import { Input } from "../Input"
 import { Button } from "../Button"
@@ -8,6 +10,8 @@ import * as yup from "yup"
 
 export function RegisterForm () {
 
+    const [showPassword, setShowPassword] = useState(false)
+    console.log()
     const navigate = useNavigate()
 
     async function registerUser (data) {
@@ -50,6 +54,10 @@ export function RegisterForm () {
 
     const { register, handleSubmit, formState: { errors }, } = useForm({ resolver: yupResolver(validate) })
 
+    function showPass() {
+        setShowPassword(!showPassword)
+    }
+
     return (
         <form onSubmit={handleSubmit(registerUser)} noValidate>
 
@@ -59,10 +67,10 @@ export function RegisterForm () {
             <Input label={"Email"} type="email" id="mail" placeholder="Digite aqui seu email" register = {register("email")}/>
             {errors.email?.message && <p>{errors.email.message}</p>}
 
-            <Input label={"Senha"} type="password" id="pass" placeholder="Digite aqui sua senha" register = {register("password")}/>
+            <Input label={"Senha"} type={showPassword ? "text" : "password"} id="pass" placeholder="Digite aqui sua senha" register = {register("password")} btnShowPass = {<button type="button" onClick={showPass}> <img src={eyeIcon} alt="eye-icon" /></button>}/>
             {errors.password?.message && <p>{errors.password.message}</p>}
 
-            <Input label={"Confirmar Senha"} type="password" id="confirm" placeholder="Digite novamente sua senha" register = {register("confirm")}/>
+            <Input label={"Confirmar Senha"} type={showPassword ? "text" : "password"} id="confirm" placeholder="Digite novamente sua senha" register = {register("confirm")}/>
             {errors.confirm?.message && <p>{errors.confirm.message}</p>}
 
             <Input label={"Bio"} type="text" id="bio" placeholder="Fale sobre você" register = {register("bio")}/>
