@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { request } from "../../services/api"
 import { Header } from "../../components/Header"
+import { StyledDahsboard } from "./style"
 
 export  function Dashboard ({setUser}) {
 
@@ -36,18 +37,20 @@ export  function Dashboard ({setUser}) {
     
     return (
         
-        <div>
+        <StyledDahsboard>
           <Header setUser = {setUser}/>
 
-          <div>
-                <p>Olá, {userInfos.name}</p>
-                <p>{userInfos.course_module}</p>
+          <div className=" user-infos display-flex align-item">
+                <div className="container mobile-container user-infos-box display-flex justfy-content-between">
+                    <h1>Olá, {userInfos.name}</h1>
+                    <p>{userInfos.course_module}</p>
+                </div>
           </div>
 
-            <main>
-                <p>Que pena! Estamos em desenvolvimento :(</p>
-                <p>Nossa aplicação está em desenvolvimento, em breve teremos novidades</p>
+            <main className="container mobile-container">
+                <p className="waring-1">Que pena! Estamos em desenvolvimento :(</p>
+                <p className="waring-2">Nossa aplicação está em desenvolvimento, em breve teremos novidades</p>
             </main>
-        </div>
+        </StyledDahsboard>
     )
 }

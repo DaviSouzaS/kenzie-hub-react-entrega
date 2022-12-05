@@ -41,5 +41,9 @@ export const Displays = createGlobalStyle`
     .register-container-mobile {
         width: 90%;
     }
+
+    .mobile-container {
+        max-width: 90%;
+    }
 }
 `
