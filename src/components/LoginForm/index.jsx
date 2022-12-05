@@ -29,7 +29,6 @@ export function LoginForm ({setUser}) {
             navigate("/dashboard")
         } catch (error){
             setLoading(false)
-            //RETORNAR MENSAGEM DE ERRO  
         }
     }
 

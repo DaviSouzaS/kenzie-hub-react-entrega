@@ -21,7 +21,6 @@ export function RegisterForm () {
             const response = await request.post("/users", data)
             navigate("/")
         } catch (error) { 
-            //RETORNAR MENSAGEM DE ERRO  
         }
     }
 

@@ -77,4 +77,22 @@ export const StyledButtons = createGlobalStyle`
         transition-duration: 0.3s;
         background-color: var(--grey-2);
     }
+
+    .header-box > button {
+        cursor: pointer;
+        border: none;
+        height: 32px;
+        width: 56px;
+        background-color: var(--grey-3);
+        border-radius: var(--radius-1);
+        color: var(--grey-0);
+        font-weight: var(--font-weight-2);
+        font-size: var(--font-size-4);
+    }
+
+    .header-box > button:hover {
+        transition-duration: 0.3s;
+        background-color: var(--grey-2);
+    }
+    
 `

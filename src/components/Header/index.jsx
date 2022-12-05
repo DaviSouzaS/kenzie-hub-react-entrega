@@ -1,6 +1,7 @@
 import logo from "../../assets/logo.svg"
 import { Button } from "../Button"
 import { useNavigate } from "react-router-dom"
+import { StyledHeader } from "./styles"
 
 export function Header ({setUser}) {
 
@@ -13,11 +14,11 @@ export function Header ({setUser}) {
     }
 
     return (
-        <header>
-            <div>
+        <StyledHeader className="display-flex align-item">
+            <div className="container mobile-container header-box display-flex justfy-content-between"> 
                 <img src={logo} alt="kenzie-hub-logo" />
                 <Button type = {"button"} name = {"Sair"} redirect = {logout}/>
             </div>
-        </header>
+        </StyledHeader>
     )
 }
