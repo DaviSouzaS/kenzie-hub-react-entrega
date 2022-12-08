@@ -4,23 +4,53 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import { useState } from "react"
 import { StyledInputBox } from "../Input/style"
 import { StyledSelect, StyledSelectBox } from "./style"
-import eyeIcon from "../../assets/eye-icon.svg"
+import { ToastContainer, toast } from "react-toastify"
 import { request } from "../../services/api"
 import { Input } from "../Input"
 import { Button } from "../Button"
+import eyeIcon from "../../assets/eye-icon.svg"
 import * as yup from "yup"
 
 export function RegisterForm () {
 
     const [showPassword, setShowPassword] = useState(false)
-    console.log()
     const navigate = useNavigate()
+
+    function toastSuccessRegister () {
+        toast.success("Conta criada com sucesso!", {
+            position: "top-right",
+            autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+        });
+    }
+
+    function toastErrorRegister () {
+        toast.error("Ops! Algo deu errado", {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+        });
+    } 
 
     async function registerUser (data) {
         try {
             const response = await request.post("/users", data)
-            navigate("/")
+            toastSuccessRegister()
+            setTimeout(() => {
+                navigate("/")
+            }, 2000);
         } catch (error) { 
+            toastErrorRegister()
         }
     }
 
@@ -106,6 +136,8 @@ export function RegisterForm () {
             </StyledSelect>
             </StyledSelectBox>
             <Button type = {"submit"} name = {"Cadastrar"}/>
+
+            <ToastContainer/>
         </form>
     )
 }

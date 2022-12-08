@@ -6,6 +6,8 @@ import { useState } from "react"
 import { Input } from "../Input"
 import { Button } from "../Button"
 import { StyledInputBox } from "../Input/style"
+import { ToastContainer, toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 import eyeIcon from "../../assets/eye-icon.svg"
 import spinner from "../../assets/spinner.svg"
 import * as yup from "yup"
@@ -17,6 +19,32 @@ export function LoginForm ({setUser}) {
 
     const navigate = useNavigate()
 
+    function toastErrorLogin () {
+       toast.error("Ops! Algo deu errado", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
+    }
+
+    function toastSuccessLogin() {
+        toast.success("Login realizado com sucesso!", {
+            position: "top-right",
+            autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+        });
+    }
+
     async function login (data) {
         try {
             setLoading(true)
@@ -26,9 +54,13 @@ export function LoginForm ({setUser}) {
             window.localStorage.setItem("@TOKEN", response.data.token) 
             window.localStorage.setItem("@USERID", response.data.user.id) 
             setLoading(false)
-            navigate("/dashboard")
+            toastSuccessLogin()
+            setTimeout(() => {
+                navigate("/dashboard")
+            }, 2000);
         } catch (error){
             setLoading(false)
+            toastErrorLogin()
         }
     }
 
@@ -59,6 +91,7 @@ export function LoginForm ({setUser}) {
 
             <Button type={"submit"} name = {loading ? <><img className="loading-icon" src={spinner} alt="loading-icon" /></> : <>Entrar</>}/>
            
+           <ToastContainer/>
         </form>
     )
 }
