@@ -1,58 +1,18 @@
 import { useForm } from "react-hook-form"
-import { useNavigate } from "react-router-dom"
 import { yupResolver } from "@hookform/resolvers/yup"
-import { useState } from "react"
 import { StyledInputBox } from "../Input/style"
 import { StyledSelect, StyledSelectBox } from "./style"
-import { ToastContainer, toast } from "react-toastify"
-import { request } from "../../services/api"
+import { ToastContainer } from "react-toastify"
 import { Input } from "../Input"
 import { Button } from "../Button"
+import { useContext } from "react"
+import { UserContext } from "../../contexts/UserContext"
 import eyeIcon from "../../assets/eye-icon.svg"
 import * as yup from "yup"
 
 export function RegisterForm () {
 
-    const [showPassword, setShowPassword] = useState(false)
-    const navigate = useNavigate()
-
-    function toastSuccessRegister () {
-        toast.success("Conta criada com sucesso!", {
-            position: "top-right",
-            autoClose: 1000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-        });
-    }
-
-    function toastErrorRegister () {
-        toast.error("Ops! Algo deu errado", {
-            position: "top-right",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-        });
-    } 
-
-    async function registerUser (data) {
-        try {
-            const response = await request.post("/users", data)
-            toastSuccessRegister()
-            setTimeout(() => {
-                navigate("/")
-            }, 2000);
-        } catch (error) { 
-            toastErrorRegister()
-        }
-    }
+    const { showPassword, showPass, registerUser} = useContext (UserContext)
 
     const validate = yup.object().shape({
         name: yup.string().required("O nome é obrigatório")
@@ -84,10 +44,6 @@ export function RegisterForm () {
     })
 
     const { register, handleSubmit, formState: { errors }, } = useForm({ resolver: yupResolver(validate) })
-
-    function showPass() {
-        setShowPassword(!showPassword)
-    }
 
     return (
         <form className="form-box" onSubmit={handleSubmit(registerUser)} noValidate>

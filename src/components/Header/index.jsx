@@ -1,18 +1,13 @@
 import logo from "../../assets/logo.svg"
 import { Button } from "../Button"
-import { useNavigate } from "react-router-dom"
 import { StyledHeader } from "./styles"
+import { useContext } from "react"
+import { UserContext } from "../../contexts/UserContext"
 
-export function Header ({setUser}) {
+export function Header () {
 
-    const navigate = useNavigate()
-
-    function logout () {
-        setUser([])
-        window.localStorage.clear()
-        navigate("/")
-    }
-
+    const { logout } = useContext (UserContext)
+    
     return (
         <StyledHeader className="display-flex align-item">
             <div className="container mobile-container header-box display-flex justfy-content-between"> 

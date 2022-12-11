@@ -6,9 +6,9 @@ import { Dashboard } from "../pages/Dashboard";
 export function PrincipalRoutes ({setUser}) {
     return (
         <Routes>
-            <Route path="/" element = {<LoginPage setUser = {setUser}/>}/>
+            <Route path="/" element = {<LoginPage/>}/>
             <Route path="/registerPage" element = {<RegisterPage/>}/>
-            <Route path="/dashboard" element = {<Dashboard setUser = {setUser}/>}/>
+            <Route path="/dashboard" element = {<Dashboard/>}/>
         </Routes>
     )
 }
