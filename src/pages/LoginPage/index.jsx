@@ -2,7 +2,7 @@ import { LoginForm } from "../../components/LoginForm"
 import { StyledLoginBg, StyledLoginBox } from "./style"
 import logo from "../../assets/logo.svg"
 
-export function LoginPage ({setUser}) {
+export function LoginPage () {
 
     return (
         <StyledLoginBg className="login-bg-mobile display-flex justify-content-center align-item">
@@ -10,7 +10,7 @@ export function LoginPage ({setUser}) {
                 <img className="logo" src={logo} alt="kenzie-hub-logo" />
                 <StyledLoginBox className="login-mobile display-flex flex-direction-column justify-content-center align-item">
                     <h1>Login</h1>
-                    <LoginForm setUser = {setUser}/>
+                    <LoginForm/>
                     <p>Ainda não possui uma conta?</p>
                     <a className="to-register-button display-flex justify-content-center align-item" href="/registerPage">Cadastre-se</a>
                 </StyledLoginBox>

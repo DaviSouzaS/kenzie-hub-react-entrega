@@ -1,68 +1,20 @@
 import { useForm } from "react-hook-form"
-import { useNavigate } from "react-router-dom"
 import { yupResolver } from "@hookform/resolvers/yup"
-import { request } from "../../services/api"
-import { useState } from "react"
 import { Input } from "../Input"
 import { Button } from "../Button"
 import { StyledInputBox } from "../Input/style"
-import { ToastContainer, toast } from "react-toastify"
+import { ToastContainer } from "react-toastify"
+import { useContext } from "react"
+import { UserContext } from "../../contexts/UserContext"
 import "react-toastify/dist/ReactToastify.css"
 import eyeIcon from "../../assets/eye-icon.svg"
 import spinner from "../../assets/spinner.svg"
 import * as yup from "yup"
 
-export function LoginForm ({setUser}) {
 
-    const [loading, setLoading] = useState(false)
-    const [showPassword, setShowPassword] = useState(false)
+export function LoginForm () {
 
-    const navigate = useNavigate()
-
-    function toastErrorLogin () {
-       toast.error("Ops! Algo deu errado", {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        });
-    }
-
-    function toastSuccessLogin() {
-        toast.success("Login realizado com sucesso!", {
-            position: "top-right",
-            autoClose: 1000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-        });
-    }
-
-    async function login (data) {
-        try {
-            setLoading(true)
-            const response = await request.post("/sessions", data) 
-            setUser(response.data.user) 
-            window.localStorage.clear()
-            window.localStorage.setItem("@TOKEN", response.data.token) 
-            window.localStorage.setItem("@USERID", response.data.user.id) 
-            setLoading(false)
-            toastSuccessLogin()
-            setTimeout(() => {
-                navigate("/dashboard")
-            }, 2000);
-        } catch (error){
-            setLoading(false)
-            toastErrorLogin()
-        }
-    }
+    const { loading, showPassword, showPass, login} = useContext (UserContext)
 
     const validate = yup.object().shape({
         email: yup.string().required("O email é obrigatório"),
@@ -71,10 +23,6 @@ export function LoginForm ({setUser}) {
     })
 
     const { register, handleSubmit, formState: { errors }, } = useForm({ resolver: yupResolver(validate) })
-
-    function showPass() {
-        setShowPassword(!showPassword)
-    }
 
     return (
         <form className="form-box form-login" onSubmit={handleSubmit(login)}>

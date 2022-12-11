@@ -1,44 +1,22 @@
-import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
-import { request } from "../../services/api"
 import { Header } from "../../components/Header"
 import { StyledDahsboard } from "./style"
+import { useContext, useEffect } from "react"
+import { UserContext } from "../../contexts/UserContext"
 
-export  function Dashboard ({setUser}) {
+export  function Dashboard () {
 
-    const navigate = useNavigate()
-
-    const [userInfos, setUserInfos] = useState([])
+    const {userInfos, getUserInfos, restriction} = useContext (UserContext)
 
     useEffect(() => {
-        async function getUserInfos () {
-            const token = localStorage.getItem("@TOKEN")
-
-            restriction(token)
-
-            const config = {
-               headers: { Authorization : `Bearer ${token}`}
-            }
-    
-            try {
-                const response = await request.get("/profile", config)
-                setUserInfos(response.data)
-            } catch (error) {
-            }
-        }
         getUserInfos()
     }, [])
 
-    function restriction (token) {
-        if (token === null) {
-            navigate("/")
-        }
-    }
+    restriction()
     
     return (
         
         <StyledDahsboard>
-          <Header setUser = {setUser}/>
+          <Header/>
 
           <div className=" user-infos display-flex align-item">
                 <div className="container mobile-container user-infos-box display-flex justfy-content-between">
