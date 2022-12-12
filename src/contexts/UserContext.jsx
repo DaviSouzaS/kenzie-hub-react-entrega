@@ -133,7 +133,9 @@ export function UserProvider({ children }) {
         login,
         registerUser,
         logout,
-        user
+        user,
+        toastError,
+
       }}
     >
       {children}

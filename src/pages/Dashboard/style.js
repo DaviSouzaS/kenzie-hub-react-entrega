@@ -100,5 +100,10 @@ export const StyledDahsboard = styled.div`
 
     .tech-box {
         padding-bottom: 30px;
+        height: 100vh;
+    }
+
+    .waring-box {
+        height: 100vh;
     }
 `

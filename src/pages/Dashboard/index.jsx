@@ -1,14 +1,16 @@
 import { Header } from "../../components/Header"
 import { StyledDahsboard } from "./style"
-import { useContext, useEffect } from "react"
+import { useContext } from "react"
 import { UserContext } from "../../contexts/UserContext"
 import { Navigate } from "react-router-dom"
 import { TechContext } from "../../contexts/TechContext"
 import { TechItem } from "../../components/TechList"
+import { ToastContainer } from "react-toastify"
 
 export  function Dashboard () {
 
-    const { user, loadingPage } = useContext (UserContext)
+    const { loadingPage, user } = useContext (UserContext)
+    const { techList } = useContext (TechContext)
 
     if (loadingPage) {
         return null
@@ -26,8 +28,8 @@ export  function Dashboard () {
           </div>
 
             {
-                user.techs.length === 0 ? 
-            <main className="container mobile-container">
+                techList.length === 0 ? 
+            <main className="container mobile-container waring-box">
                 <p className="waring-1">Que pena! Estamos em desenvolvimento :(</p>
                 <p className="waring-2">Nossa aplicação está em desenvolvimento, em breve teremos novidades</p>
             </main> :
@@ -39,13 +41,13 @@ export  function Dashboard () {
                 <main className="container mobile-container tech-list-bg">
                     <ul className="display-flex align-item flex-direction-column gap-16">
                     {
-                        user.techs.map(item => <TechItem key = {item.id} tech = {item}/>)
+                        techList.map(item => <TechItem key = {item.id} tech = {item}/>)
                     }
                     </ul>
                 </main>
             </div> 
             }
-
+            <ToastContainer/>
         </StyledDahsboard>
         : 
         <Navigate to = '/'/>
