@@ -1,15 +1,30 @@
-import { createContext } from "react";
+import { createContext, useState, useContext } from "react";
+import { request } from "../services/api";
+import { UserContext } from "./UserContext";
 
 export const TechContext = createContext({});
 
-const teste = "TESTE PROV"
+export function TechProviders({ children }) {
 
+  const { user } = useContext (UserContext)
 
+  const [techs, setTechs] = useState(user);
 
-export function TechProviders ({children}) {
-    return (
-        <TechContext.Provider value={{teste}}>
-            {children}
-        </TechContext.Provider>
-    )
+  async function deleteTech(techId) {
+    const token = localStorage.getItem("@TOKEN");
+
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
+
+    try {
+      const response = await request.delete(`/users/techs/${techId}`, config);
+    } catch (error) {}
+  }
+
+  return (
+    <TechContext.Provider value={{ techs, setTechs }}>
+        {children}
+    </TechContext.Provider>
+  );
 }

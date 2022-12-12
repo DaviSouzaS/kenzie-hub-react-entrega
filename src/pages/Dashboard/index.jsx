@@ -9,7 +9,6 @@ import { TechItem } from "../../components/TechList"
 export  function Dashboard () {
 
     const { user, loadingPage } = useContext (UserContext)
-    const { teste } = useContext (TechContext)
 
     if (loadingPage) {
         return null
@@ -31,14 +30,20 @@ export  function Dashboard () {
             <main className="container mobile-container">
                 <p className="waring-1">Que pena! Estamos em desenvolvimento :(</p>
                 <p className="waring-2">Nossa aplicação está em desenvolvimento, em breve teremos novidades</p>
-            </main> : 
-            <main className="container mobile-container tech-list-bg">
-                <ul className="display-flex align-item flex-direction-column gap-16">
-                {
-                    user.techs.map(item => <TechItem key = {item.id} tech = {item}/>)
-                }
-                </ul>
-            </main>
+            </main> :
+            <div className="container tech-box">
+                <div className="add-tech-box display-flex justfy-content-between align-item">
+                    <p>Tecnologias</p>
+                    <button>+</button>
+                </div>
+                <main className="container mobile-container tech-list-bg">
+                    <ul className="display-flex align-item flex-direction-column gap-16">
+                    {
+                        user.techs.map(item => <TechItem key = {item.id} tech = {item}/>)
+                    }
+                    </ul>
+                </main>
+            </div> 
             }
 
         </StyledDahsboard>
