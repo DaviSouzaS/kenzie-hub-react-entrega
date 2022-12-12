@@ -11,7 +11,6 @@ export function UserProvider({ children }) {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [loadingPage, setLoadingPage] = useState(true);
-  const [userInfos, setUserInfos] = useState([]);
 
   const navigate = useNavigate();
 
@@ -89,19 +88,6 @@ export function UserProvider({ children }) {
     });
   }
 
-  async function getUserInfos() {
-    const token = localStorage.getItem("@TOKEN");
-
-    const config = {
-      headers: { Authorization: `Bearer ${token}` },
-    };
-
-    try {
-      const response = await request.get("/profile", config);
-      setUserInfos(response.data);
-    } catch (error) {}
-  }
-
   useEffect(() => {
 
     async function verifyingToken () {
@@ -144,8 +130,6 @@ export function UserProvider({ children }) {
         loading,
         setLoading,
         loadingPage,
-        userInfos,
-        getUserInfos,
         login,
         registerUser,
         logout,
