@@ -50,6 +50,6 @@ export  function Dashboard () {
             <ToastContainer/>
         </StyledDahsboard>
         : 
-        <Navigate to = '/'/>
+        <Navigate to = "/"/>
     
 }
