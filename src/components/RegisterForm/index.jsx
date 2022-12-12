@@ -1,28 +1,18 @@
 import { useForm } from "react-hook-form"
-import { useNavigate } from "react-router-dom"
 import { yupResolver } from "@hookform/resolvers/yup"
-import { useState } from "react"
 import { StyledInputBox } from "../Input/style"
 import { StyledSelect, StyledSelectBox } from "./style"
-import eyeIcon from "../../assets/eye-icon.svg"
-import { request } from "../../services/api"
+import { ToastContainer } from "react-toastify"
 import { Input } from "../Input"
 import { Button } from "../Button"
+import { useContext } from "react"
+import { UserContext } from "../../contexts/UserContext"
+import eyeIcon from "../../assets/eye-icon.svg"
 import * as yup from "yup"
 
 export function RegisterForm () {
 
-    const [showPassword, setShowPassword] = useState(false)
-    console.log()
-    const navigate = useNavigate()
-
-    async function registerUser (data) {
-        try {
-            const response = await request.post("/users", data)
-            navigate("/")
-        } catch (error) { 
-        }
-    }
+    const { showPassword, showPass, registerUser} = useContext (UserContext)
 
     const validate = yup.object().shape({
         name: yup.string().required("O nome é obrigatório")
@@ -54,10 +44,6 @@ export function RegisterForm () {
     })
 
     const { register, handleSubmit, formState: { errors }, } = useForm({ resolver: yupResolver(validate) })
-
-    function showPass() {
-        setShowPassword(!showPassword)
-    }
 
     return (
         <form className="form-box" onSubmit={handleSubmit(registerUser)} noValidate>
@@ -106,6 +92,8 @@ export function RegisterForm () {
             </StyledSelect>
             </StyledSelectBox>
             <Button type = {"submit"} name = {"Cadastrar"}/>
+
+            <ToastContainer/>
         </form>
     )
 }

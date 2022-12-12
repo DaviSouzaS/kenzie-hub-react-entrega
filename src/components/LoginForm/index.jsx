@@ -1,36 +1,20 @@
 import { useForm } from "react-hook-form"
-import { useNavigate } from "react-router-dom"
 import { yupResolver } from "@hookform/resolvers/yup"
-import { request } from "../../services/api"
-import { useState } from "react"
 import { Input } from "../Input"
 import { Button } from "../Button"
 import { StyledInputBox } from "../Input/style"
+import { ToastContainer } from "react-toastify"
+import { useContext } from "react"
+import { UserContext } from "../../contexts/UserContext"
+import "react-toastify/dist/ReactToastify.css"
 import eyeIcon from "../../assets/eye-icon.svg"
 import spinner from "../../assets/spinner.svg"
 import * as yup from "yup"
 
-export function LoginForm ({setUser}) {
 
-    const [loading, setLoading] = useState(false)
-    const [showPassword, setShowPassword] = useState(false)
+export function LoginForm () {
 
-    const navigate = useNavigate()
-
-    async function login (data) {
-        try {
-            setLoading(true)
-            const response = await request.post("/sessions", data) 
-            setUser(response.data.user) 
-            window.localStorage.clear()
-            window.localStorage.setItem("@TOKEN", response.data.token) 
-            window.localStorage.setItem("@USERID", response.data.user.id) 
-            setLoading(false)
-            navigate("/dashboard")
-        } catch (error){
-            setLoading(false)
-        }
-    }
+    const { loading, showPassword, showPass, login} = useContext (UserContext)
 
     const validate = yup.object().shape({
         email: yup.string().required("O email é obrigatório"),
@@ -39,10 +23,6 @@ export function LoginForm ({setUser}) {
     })
 
     const { register, handleSubmit, formState: { errors }, } = useForm({ resolver: yupResolver(validate) })
-
-    function showPass() {
-        setShowPassword(!showPassword)
-    }
 
     return (
         <form className="form-box form-login" onSubmit={handleSubmit(login)}>
@@ -59,6 +39,7 @@ export function LoginForm ({setUser}) {
 
             <Button type={"submit"} name = {loading ? <><img className="loading-icon" src={spinner} alt="loading-icon" /></> : <>Entrar</>}/>
            
+           <ToastContainer/>
         </form>
     )
 }

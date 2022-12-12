@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { GlobalStyles } from './styles/globalStyles';
 import { Displays } from './styles/displays';
 import { StyledButtons } from './styles/buttons';
+import { UserProvider } from './contexts/UserContext';
 import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -13,7 +14,9 @@ root.render(
     <GlobalStyles/>
     <Displays/>
     <StyledButtons/>
+    <UserProvider>
       <App />
+    </UserProvider>
     </BrowserRouter>
   </React.StrictMode>
 );
