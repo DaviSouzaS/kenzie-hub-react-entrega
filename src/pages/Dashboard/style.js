@@ -28,20 +28,6 @@ export const StyledDahsboard = styled.div`
         color: var(--grey-1);
     }
 
-    .waring-1 {
-        margin-top: 37px;
-        margin-bottom: 23px;
-        font-weight: var(--font-weight-1);
-        font-size: var(--font-size-1);
-        color: var(--grey-0);
-    }
-
-    .waring-2 {
-        font-weight: var(--font-weight-4);
-        font-size: var(--font-size-2);
-        color: var(--white);
-    }
-
     .tech-list-bg {
         background-color: var(--grey-3);
         height: 416px;
@@ -61,7 +47,7 @@ export const StyledDahsboard = styled.div`
     width: 9px;               
     }
   
-    tech-list-bg > ul::-webkit-scrollbar-track {
+    .tech-list-bg > ul::-webkit-scrollbar-track {
     background: transparent;        
     }
   
@@ -105,5 +91,26 @@ export const StyledDahsboard = styled.div`
 
     .waring-box {
         height: 100vh;
+    }
+
+    .waring {
+        width: 100%;
+        height: 100%;
+    }
+
+    .waring > p {
+        font-weight: var(--font-weight-2);
+        font-size: var(--font-size-1);
+        color: var(--grey-1);
+    }   
+
+    .waring > div {
+        padding: 6px 11px;
+        background-color: var(--grey-3);
+        border-radius: var(--radius-1);
+        font-weight: var(--font-weight-3);
+        font-size: var(--font-size-1);
+        color: var(--white);
+        box-shadow: 0px 0px 8px var(--grey-4);
     }
 `

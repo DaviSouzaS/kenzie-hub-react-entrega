@@ -28,28 +28,30 @@ export  function Dashboard () {
           </div>
 
             {
-                techList.length === 0 ? 
-            <main className="container mobile-container waring-box">
-                <p className="waring-1">Que pena! Estamos em desenvolvimento :(</p>
-                <p className="waring-2">Nossa aplicação está em desenvolvimento, em breve teremos novidades</p>
-            </main> :
             <div className="container tech-box">
-                <div className="add-tech-box display-flex justfy-content-between align-item">
+                <div className="add-tech-box container mobile-container display-flex justfy-content-between align-item">
                     <p>Tecnologias</p>
                     <button>+</button>
                 </div>
                 <main className="container mobile-container tech-list-bg">
+                    { techList.length === 0 ? 
+                    <div className="waring container mobile-container display-flex justify-content-center align-item gap-16">
+                        <p className="display-flex">Para adcionar tecnologias clique no botão:</p>
+                        <div>+</div>
+                    </div>
+                    :
                     <ul className="display-flex align-item flex-direction-column gap-16">
                     {
                         techList.map(item => <TechItem key = {item.id} tech = {item}/>)
                     }
                     </ul>
+                    }
                 </main>
             </div> 
             }
             <ToastContainer/>
         </StyledDahsboard>
         : 
-        <Navigate to = '/'/>
+        <Navigate to = "/"/>
     
 }
