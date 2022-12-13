@@ -135,7 +135,6 @@ export function UserProvider({ children }) {
         logout,
         user,
         toastError,
-
       }}
     >
       {children}
