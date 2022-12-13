@@ -6,11 +6,16 @@ import { Navigate } from "react-router-dom"
 import { TechContext } from "../../contexts/TechContext"
 import { TechItem } from "../../components/TechList"
 import { ToastContainer } from "react-toastify"
+import { TemplateModal } from "../../components/TemplateModal"
 
 export  function Dashboard () {
 
     const { loadingPage, user } = useContext (UserContext)
-    const { techList } = useContext (TechContext)
+    const { techList, modal, setModal } = useContext (TechContext)
+
+    function openModal () {
+        setModal(true)
+    }
 
     if (loadingPage) {
         return null
@@ -18,6 +23,9 @@ export  function Dashboard () {
 
     return user ?
        <StyledDahsboard>
+            {
+             modal ? <TemplateModal/> : ''
+            }
           <Header/>
 
           <div className=" user-infos display-flex align-item">
@@ -31,8 +39,9 @@ export  function Dashboard () {
             <div className="container tech-box">
                 <div className="add-tech-box container mobile-container display-flex justfy-content-between align-item">
                     <p>Tecnologias</p>
-                    <button>+</button>
+                    <button type="button" onClick={() => openModal()}>+</button>
                 </div>
+                
                 <main className="container mobile-container tech-list-bg">
                     { techList.length === 0 ? 
                     <div className="waring container mobile-container display-flex justify-content-center align-item gap-16">
