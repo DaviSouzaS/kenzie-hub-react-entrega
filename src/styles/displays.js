@@ -6,7 +6,7 @@ export const Displays = createGlobalStyle`
     display: flex;
 }
 
-.flex-direction-column{
+.flex-direction-column {
     flex-direction: column;
 }
 

@@ -2,17 +2,21 @@ import { StyledTech } from "./style"
 import { TechContext } from "../../contexts/TechContext"
 import { useContext } from "react"
 import trashIcon from "../../assets/trash-icon.svg"
-import { UserContext } from "../../contexts/UserContext"
-import spinner from "../../assets/spinner.svg"
 
 export function TechItem ({tech}) {
+    const { deleteTech, setModalEditTech, setTechId, setTechItems } = useContext (TechContext)
 
-    const { deleteTech } = useContext (TechContext)
-    const { loading } = useContext (UserContext)
+    function openModal (techId) {
+        setModalEditTech(true)
+        setTechId(techId)
+        setTechItems(tech)
+    }
 
     return (
         <StyledTech className="display-flex justfy-content-between align-item"> 
-            <h2>{tech.title}</h2> 
+            <div onClick={() => openModal(tech.id)} className="card-body display-flex align-item">
+                <h2>{tech.title}</h2>
+            </div> 
             <span className="display-flex gap-25">
                 <p>{tech.status}</p>
                 <button onClick={() => deleteTech(tech.id)}>
