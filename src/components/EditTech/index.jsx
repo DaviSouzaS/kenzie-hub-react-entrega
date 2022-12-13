@@ -7,17 +7,18 @@ import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 
-export function AddNewTech () {
-
-    const { setModalAddTech, addNewTech } = useContext (TechContext)
+export function EditTech () {
+    const { setModalEditTech, techId, editTech, techItems } = useContext (TechContext)
 
     function closeModal () {
-        setModalAddTech(false)
+        setModalEditTech(false)
+    }
+
+    function changeTechInfos (data) {
+        editTech(techId, data)
     }
 
     const validate = yup.object().shape({
-        title: yup.string().required("Este campo é obrigatório")
-        .max(20, "O campo pode ter até 20 caracteres"),
         status: yup.string().required()
     })
 
@@ -27,16 +28,15 @@ export function AddNewTech () {
             <div className="modal-tech">
                 <div className="modal-header-box display-flex align-item justify-content-center">
                     <div className="modal-header display-flex align-item justfy-content-between">
-                        <p>Cadastrar Tecnologia</p>
+                        <p>Editar Tecnologia</p>
                         <button type="button" onClick={() => closeModal()}>X</button>
                     </div>
                 </div>
 
                 <div className="display-flex justify-content-center">
-                    <form className="modal-form" onSubmit={handleSubmit(addNewTech)} noValidate>
+                    <form className="modal-form" onSubmit={handleSubmit(changeTechInfos)} noValidate>
                         <StyledInputBox>
-                           <Input label={"Nome"} type="text" id="name" placeholder="Digite a tecnologia" register = {register("title")}/> 
-                           {errors.title?.message && <p className="input-waring">{errors.title.message}</p>}
+                           <Input label={"Nome"} type="text" id="name" placeholder="Digite a tecnologia" disabled = {true} value = {techItems.title}/>
                         </StyledInputBox>
 
                         <div className="set-status-box">
@@ -49,7 +49,7 @@ export function AddNewTech () {
                                 </select>
                             </div>
                         </div>
-                        <Button name={"Cadastrar Tecnologia"} type = {"submit"}/>
+                        <Button name={"Salvar Alterações"} type ={"submit"}/>
                     </form>
                 </div>
             </div>

@@ -34,4 +34,9 @@ export const StyledTech = styled.li`
         background-color: transparent;
         border: none;
     }
+
+    .card-body {
+        min-height: 49px;
+        width: 100%;
+    }
 `

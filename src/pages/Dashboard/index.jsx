@@ -11,10 +11,10 @@ import { TemplateModal } from "../../components/TemplateModal"
 export  function Dashboard () {
 
     const { loadingPage, user } = useContext (UserContext)
-    const { techList, modal, setModal } = useContext (TechContext)
+    const { techList, modalAddTech, setModalAddTech, modalEditTech } = useContext (TechContext)
 
     function openModal () {
-        setModal(true)
+        setModalAddTech(true)
     }
 
     if (loadingPage) {
@@ -24,7 +24,10 @@ export  function Dashboard () {
     return user ?
        <StyledDahsboard>
             {
-             modal ? <TemplateModal/> : ''
+             modalAddTech ? <TemplateModal/> : ""
+            }
+            {
+             modalEditTech ? <TemplateModal/> : ""
             }
           <Header/>
 
