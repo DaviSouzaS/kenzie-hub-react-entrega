@@ -8,23 +8,23 @@ export const TechContext = createContext({});
 export function TechProviders({ children }) {
 
   const [ techList, setTechList ] = useState([])
-
+  const [ modal, setModal ] = useState(false)
   const { toastError, setLoading } = useContext (UserContext)
 
   async function deleteTech(techId) {
     const token = localStorage.getItem("@TOKEN");
 
     const config = {
-      headers: { Authorization: `Bearer ${token}` },
+      headers: { Authorization: `Bearer ${token}` }
     };
 
     try {
       setLoading(true);
       const response = await request.delete(`/users/techs/${techId}`, config);
-      setLoading(false)
+      setLoading(false);
       toastSuccessDelete();
     } catch (error) {
-        toastError()
+        toastError();
     }
   }
 
@@ -33,7 +33,7 @@ export function TechProviders({ children }) {
     const token = localStorage.getItem("@TOKEN");
 
     const config = {
-      headers: { Authorization: `Bearer ${token}` },
+      headers: { Authorization: `Bearer ${token}` }
     };
 
     try {
@@ -43,6 +43,24 @@ export function TechProviders({ children }) {
   }
 
   getNewUserInfos()
+
+  async function addNewTech (data) {
+    const token = localStorage.getItem("@TOKEN");
+
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
+
+    try {
+      setLoading(true);
+      const response = await request.post(`/users/techs`, data, config);
+      setLoading(false)
+      setModal(false)
+      toastSuccessAddTech();
+    } catch (error) {
+        toastError()
+    }
+  }
 
   function toastSuccessDelete() {
     toast.success("Tech apagada com sucesso!", {
@@ -57,8 +75,21 @@ export function TechProviders({ children }) {
     });
   }
 
+  function toastSuccessAddTech() {
+    toast.success("Tech criada com sucesso!", {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  }
+
   return (
-    <TechContext.Provider value={{ deleteTech, techList }}>
+    <TechContext.Provider value={{ deleteTech, techList, modal, setModal, addNewTech }}>
       {children}
     </TechContext.Provider>
   );
