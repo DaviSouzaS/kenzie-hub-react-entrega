@@ -22,9 +22,13 @@ export const StyledInput = styled.div`
 
     input {
         width: 90%;
-        background-color: var(--grey-2);
+        background-color: transparent;
         border: none;
         color: var(--grey-0);
+    }
+
+    input:-webkit-autofill, input:-webkit-autofill:focus {
+        transition: background-color 600000s 0s, color 600000s 0s;
     }
 
     input::placeholder {
